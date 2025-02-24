@@ -52,8 +52,6 @@ import Column from 'primevue/column';
 import Pagination from '@/components/Pagination.vue';
 import ProgressSpinner from 'primevue/progressspinner';
 
-const route = useRoute();
-
 const { inventoryData = [] } = defineProps({
     inventoryData: {
         type: Array,

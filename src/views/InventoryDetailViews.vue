@@ -1,8 +1,10 @@
 <template>
+
     <div v-if="loading" class="h-dvh flex justify-center items-center">
         <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="transparent" animationDuration=".5s"
             aria-label="Custom ProgressSpinner" />
     </div>
+
     <Card v-else-if="stores.inventories">
         <template #header>
             <div class="item-card  p-4 flex  gap-5">
@@ -23,6 +25,19 @@
             </p>
         </template>
     </Card>
+
+    <div class="card  flex justify-center ms-10 my-8" v-if="stores.inventories && stores.inventories.gallery">
+        <Galleria :value="stores.inventories.gallery" :responsiveOptions="responsiveOptions" :numVisible="5"
+            containerStyle="max-width: 1040px">
+            <template #item="slotProps">
+                <img :src="slotProps.item" :alt="slotProps.item.alt" style="width: 100%" />
+            </template>
+            <template #thumbnail="slotProps">
+                <img :src="slotProps.item" :alt="slotProps.item.alt" />
+            </template>
+        </Galleria>
+    </div>
+
 </template>
 
 <script setup>
@@ -31,13 +46,17 @@ import { onBeforeMount, ref } from 'vue';
 import Image from 'primevue/image';
 import ProgressSpinner from 'primevue/progressspinner';
 
+import Galleria from 'primevue/galleria';
+
+
 import Card from 'primevue/card';
 import { useRoute } from 'vue-router';
 import { useInventoryStore } from '../stores/inventory';
+
+let loading = ref(true)
 let stores = useInventoryStore()
 const route = useRoute()
-let loading = ref(true)
-const images = ref();
+
 
 onBeforeMount(async () => {
     try {
@@ -49,15 +68,7 @@ onBeforeMount(async () => {
         loading.value = false;
     }
 });
-const responsiveOptions = ref([
-    {
-        breakpoint: '575px',
-        numVisible: 4
-    },
-    {
-        breakpoint: '575px',
-        numVisible: 1
-    }
-]);
+
+
 
 </script>

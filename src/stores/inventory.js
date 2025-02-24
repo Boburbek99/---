@@ -8,18 +8,15 @@ export const useInventoryStore = defineStore('inventory', () => {
 
   const fetchInventories = async () => {
     const response = await inventoryRequest.getAllInventory();
-    console.log(response.data, 'value')
     inventories.value = response.data;
   };
   const getByIdInventories = async (id) => {
     const response = await inventoryRequest.getById(id);
-    console.log(response.data, 'value')
     inventories.value = response.data;
   };
   const fetchCategories = async () => {
     const response = await inventoryRequest.getAllCategories();
     categories.value = await response.data;
-    console.log(categories.value, 'value')
   };
 
   const addInventory = async (inventory) => {
@@ -29,7 +26,6 @@ export const useInventoryStore = defineStore('inventory', () => {
 
   const updateInventory = async (id, inventory) => {
     const response = await inventoryRequest.updateInventory(id, inventory)
-    console.log(response.data, 'inventoryStore')
     const updatedInventory = response.data;
     const index = inventories.value.findIndex((item) => item.id === id);
     inventories.value[index] = updatedInventory;

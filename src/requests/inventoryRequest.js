@@ -33,7 +33,6 @@ export default {
         try {
             console.log(inventoryData, 'request')
             const response = await axios.put(`${API_URL}/inventories/${id}`, inventoryData);
-            console.log(response.data, 'inventaryUpdate')
             return response
         } catch (error) {
             console.log('Ошибка', error)
