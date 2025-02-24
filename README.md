@@ -27,3 +27,7 @@ npm run dev
 ```sh
 npm run build
 ```
+
+#deploy
+
+https://yusloft.netlify.app/
